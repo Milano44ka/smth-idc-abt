@@ -1,1 +1,127 @@
+void setup() 
+{  
+  size(800, 600);
+  background(#FFD8E7);
+}
 
+float x0 = 800/2;
+float y0 = 600/2;
+float k = 10; //otrezok 10
+float x1=0, x2=0 ;
+
+float ScreenX (float x)//convert computer x to screen x
+{
+  return x0 + k*x;
+} 
+
+float ScreenY (float y)//convert computer y to screen y
+{
+  return y0 - k*y;
+} 
+
+void DrawAxes(float X, float Y) //osi coordinat
+{
+  line(X/2, 0, X/2, Y);
+  line(0, Y/2, X, Y/2);
+  for (int i = 0; i < X/10; i++)
+  {
+    line(i*10, Y/2-5, i*10, Y/2+5);
+  }
+  for (int i = 0; i < Y/10; i++)
+  {
+    line(X/2 - 5, i*10, X/2 + 5, i*10);
+  }
+}
+
+void Point ( float x, float y) //draw points for functions
+{
+  if ( x >= -800 && x < 800 && y >= -600 && y < 600 )
+  {
+    stroke(#000000);
+    point(x, y);
+  }
+} 
+
+float F1(float x) //y = x^2 - 10
+{
+  return pow(x, 2) -10;
+}
+
+float F2(float x) //y = x + 3;
+{
+  return x + 3;
+}
+
+float Solve( float a, float b, float eps )
+{
+  float c, fa, fc;
+  while ( abs(b-a)> eps ) 
+  { 
+    c = (a + b) / 2.; 
+    fa = F1(a) - F2(a); 
+    fc = F1(c) - F2(c);
+    if ( fa*fc < 0 ) b = c;
+    else a = c;
+  }
+  return (a + b) / 2;
+} 
+
+void Cross ()
+{
+  x1 = Solve(-40, 0, 0.001); // найти x-координату точки
+  x2 = Solve(0, 40, 0.001);
+  textSize(20);
+  fill(50);  
+  text("First dot is (            ;           )", 10, 50 );
+  text(x1, 130, 50);
+  text(F1(x1), 210, 50);  
+  text("Second dot is (          ;           )", 10, 80 );
+  text(x2, 150, 80);
+  text(F2(x2), 220, 80);
+} 
+
+void Plot()//draw functions
+{
+  float x, h, xmin, xmax;
+  h = 1 / k;
+  xmin = -800;
+  xmax = 800;
+  for ( x = xmin; x <= xmax; x += h/20 ) //square func
+  {
+    Point(ScreenX(x), ScreenY(F1(x)));
+  }
+  for ( x = xmin; x <= xmax; x += h )//linear func
+  {
+    Point(ScreenX(x), ScreenY(F2(x)));
+  }
+} 
+
+void FillLines()
+{
+  for (float i = x1; i <= x2; i += 0.8)
+  {
+    fill(50);
+    line(ScreenX(i), ScreenY(F1(i)), ScreenX(i), ScreenY(F2(i)));
+  }
+}
+
+void SquareCount()
+{
+  float S = 0, x, h = 0.001;
+  for ( x = x1; x <= x2-h; x += h )
+  {
+    S += F1(x+h/2) - F2(x+h/2);
+  }
+  S *= h;
+  text("Square is ", 10, 110);
+  text(abs(S), 100, 110);
+}
+
+void draw() //main program
+{
+  DrawAxes(width, height);
+  Plot();
+  Cross();
+  FillLines();
+  SquareCount();
+}
