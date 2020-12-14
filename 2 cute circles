@@ -1,0 +1,32 @@
+int x0 = 500/2;
+int y0 = 500/2;
+int L = 220;
+int L1 = 120;
+int R = 40;
+float a = 0;
+float b = 0.5;
+
+void DrawCircle(float x, float y, int colorr)
+{
+  if (colorr == 1)
+    fill(#02AAE5);
+  else
+    fill(#2F36DE);
+  noStroke();
+  circle(x, y, R); 
+}
+
+void setup()
+{
+  size(500, 500);
+  background(#FFD3EB);
+}
+
+void draw()
+{
+  background(#FFD3EB);
+  DrawCircle(x0+L*cos(a), y0+L*sin(a), 1);
+  DrawCircle(x0+L1*cos(b), y0+L1*sin(b), 0);
+  a += PI/150 - a/500;
+  b += PI/180 - a/700;
+}
