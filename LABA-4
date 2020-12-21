@@ -1,0 +1,64 @@
+#include <cstdlib>
+#include <iostream>
+#include <random>
+using namespace std;
+
+string KOD[10][2] = 
+    {
+        {"0", "0000000"},
+        {"1", "0001111"},
+        {"2", "0010110"},
+        {"3", "0011001"},
+        {"4", "0100101"},
+        {"5", "0101010"},
+        {"6", "0110011"},
+        {"7", "0111100"},
+        {"8", "1000011"},
+        {"9", "1001100"},
+    };
+
+string KODN(int num)
+{
+    string line;
+    
+    while (num != 0)
+    {
+        switch(num%10)
+        {
+            case 0: line += KOD[0][2]; break;
+            case 1: line += KOD[1][2]; break;
+            case 2: line += KOD[2][2]; break;
+            case 3: line += KOD[3][2]; break;
+            case 4: line += KOD[4][2]; break;
+            case 5: line += KOD[5][2]; break;
+            case 6: line += KOD[6][2]; break;
+            case 7: line += KOD[7][2]; break;
+            case 8: line += KOD[8][2]; break;
+            case 9: line += KOD[9][2]; break;
+        }
+    }
+    
+    return line;
+}
+
+int createnum()
+{
+    return(100000000 + rand()*rand());
+}
+
+string Noise()
+{
+    int k;
+    string b;
+    
+    for(int i = 1; i <= 6; i++)
+    {
+        k = 1 + rand() % 34.5;
+        
+    }
+}
+
+int main()
+{
+    
+}
