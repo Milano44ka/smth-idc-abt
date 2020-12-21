@@ -43,7 +43,7 @@ string KODN(int num)
 
 int createnum()
 {
-    return(100000000 + rand()*rand());
+    return(100000000 + rand()*1000 + rand());
 }
 
 string Noise()
