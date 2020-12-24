@@ -1,0 +1,70 @@
+float[] X = new float[100];
+float[] Y = new float[100];
+float r=20;
+int n=100;
+
+void setup()
+{
+  size(800,600);
+}
+
+void Init () //задаем ранд начальные точки
+{
+  int i;          
+    for ( i = 0; i < n; i ++ )    
+    {    
+      X[i] = random(800 - 2*r) + r;    
+      Y[i] = random(600 - 2*r) + r;    
+    }
+}
+
+void DrawCirc() //строим по ранд нач точкам
+{
+    for(int i=0; i<n; i++)
+    {
+      noStroke();
+      circle(X[i], Y[i], r);
+    }
+}
+  
+void Move()
+{
+  for(int i=0;i<n;i++)
+  {
+    if(random(2)>1)
+    {
+      X[i]+=random(10);
+    }
+    else
+    {
+      X[i]-=random(10);
+    }
+    Y[i]-=random(10);
+  }
+}
+
+void Zamena()
+{
+  for(int i=0;i<n;i++)
+  {
+    if(Y[i]<0)
+    {
+      Y[i]=random(600 - 2*r) + r;
+    }
+  }
+}
+
+int counter=0;
+
+void draw()
+{
+  background(#0082AF);
+  Move();
+  DrawCirc();
+  if(counter==0)
+  {
+    Init();
+    counter = 1;
+  }
+  Zamena();
+}
