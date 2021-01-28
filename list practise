@@ -1,0 +1,68 @@
+#include <stdio.h>
+
+PNode Head = NULL; 
+
+struct Node 
+{
+ char word[40]; 
+ int count;
+ Node *next; 
+ };
+typedef Node *PNode;
+
+PNode CreateNode ( char NewWord[] )
+{
+ PNode NewNode = new Node; 
+ strcpy(NewNode->word, NewWord); 
+ NewNode->count = 1; 
+ NewNode->next = NULL; 
+ return NewNode; 
+} 
+
+void AddAfter (PNode p, PNode NewNode)
+{
+ NewNode->next = p->next;
+ p->next = NewNode;
+}
+
+void AddBefore(PNode &Head, PNode p, PNode NewNode)
+{
+    PNode q = Head;
+    if (Head == p) 
+    {
+        AddFirst(Head, NewNode); 
+        return;
+    }
+    while (q && q->next!=p) // ищем узел, за которым следует p
+    {
+        q = q->next;
+    }
+    if ( q ) // если нашли такой узел,
+    {
+        AddAfter(q, NewNode); // добавить новый после него
+    }
+}
+
+void AddLast(PNode &Head, PNode NewNode)
+{
+    PNode q = Head;
+    if (Head == NULL)  // если список пуст,
+    {
+        AddFirst(Head, NewNode); // вставляем первый элемент
+        return;
+    }
+    while (q->next) q = q->next; // ищем последний элемент
+        AddAfter(q, NewNode);
+} 
+
+PNode p = Head; // начали с головы списка
+    while ( p != NULL )  // пока не дошли до конца
+    {
+        // делаем что-нибудь с узлом p
+        p = p->next; // переходим к следующему узлу
+    } 
+
+int main()
+{
+
+}
