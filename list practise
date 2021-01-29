@@ -55,14 +55,28 @@ void AddLast(PNode &Head, PNode NewNode)
         AddAfter(q, NewNode);
 } 
 
-PNode p = Head; // начали с головы списка
+PNode Find (PNode Head, char NewWord[])
+{
+ PNode q = Head;
+ while (q && strcmp(q->word, NewWord))
+ q = q->next;
+ return q;
+}
+
+PNode FindPlace (PNode Head, char NewWord[])
+{
+ PNode q = Head;
+ while (q && (strcmp(q->word, NewWord) > 0))
+ q = q->next;
+ return q;
+} 
+
+int main()
+{
+ PNode p = Head; // начали с головы списка
     while ( p != NULL )  // пока не дошли до конца
     {
         // делаем что-нибудь с узлом p
         p = p->next; // переходим к следующему узлу
     } 
-
-int main()
-{
-
 }
