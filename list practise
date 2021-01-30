@@ -8,9 +8,9 @@ struct Node
  int count;
  Node *next; 
  };
-typedef Node *PNode;
+typedef Node *PNode; //указатель на узел
 
-PNode CreateNode ( char NewWord[] )
+PNode CreateNode ( char NewWord[] ) //создание нового узла с контентом NewWord
 {
  PNode NewNode = new Node; 
  strcpy(NewNode->word, NewWord); 
@@ -19,13 +19,19 @@ PNode CreateNode ( char NewWord[] )
  return NewNode; 
 } 
 
-void AddAfter (PNode p, PNode NewNode)
+void AddFirst (PNode &Head, PNode NewNode) //добавление новой головы NewNode, старая смещается
+{
+ NewNode->next = Head;
+ Head = NewNode;
+}
+
+void AddAfter (PNode p, PNode NewNode) //добавление узла NewNode после узла с адресом р
 {
  NewNode->next = p->next;
  p->next = NewNode;
 }
 
-void AddBefore(PNode &Head, PNode p, PNode NewNode)
+void AddBefore(PNode &Head, PNode p, PNode NewNode) //добавление узла NewNode перед узлом с адресом р
 {
     PNode q = Head;
     if (Head == p) 
@@ -43,7 +49,7 @@ void AddBefore(PNode &Head, PNode p, PNode NewNode)
     }
 }
 
-void AddLast(PNode &Head, PNode NewNode)
+void AddLast(PNode &Head, PNode NewNode) //добавить в конец узел NewNode
 {
     PNode q = Head;
     if (Head == NULL)  // если список пуст,
@@ -55,7 +61,7 @@ void AddLast(PNode &Head, PNode NewNode)
         AddAfter(q, NewNode);
 } 
 
-PNode Find (PNode Head, char NewWord[])
+PNode Find (PNode Head, char NewWord[]) //поиск адреса узла с контентом NewWord
 {
  PNode q = Head;
  while (q && strcmp(q->word, NewWord))
@@ -63,7 +69,7 @@ PNode Find (PNode Head, char NewWord[])
  return q;
 }
 
-PNode FindPlace (PNode Head, char NewWord[])
+PNode FindPlace (PNode Head, char NewWord[]) //поиск адреса узла, по алф предшевств узлу с контентом NewWord
 {
  PNode q = Head;
  while (q && (strcmp(q->word, NewWord) > 0))
@@ -73,7 +79,8 @@ PNode FindPlace (PNode Head, char NewWord[])
 
 int main()
 {
- PNode p = Head; // начали с головы списка
+    setlocale(0, "");
+    PNode p = Head; 
     while ( p != NULL )  // пока не дошли до конца
     {
         // делаем что-нибудь с узлом p
