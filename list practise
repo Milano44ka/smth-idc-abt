@@ -1,6 +1,6 @@
 #include <stdio.h>
-
-PNode Head = NULL; 
+#include <string.h>
+#include <iostream>
 
 struct Node 
 {
@@ -9,6 +9,8 @@ struct Node
  Node *next; 
  };
 typedef Node *PNode; //указатель на узел
+
+PNode Head = NULL;
 
 PNode CreateNode ( char NewWord[] ) //создание нового узла с контентом NewWord
 {
