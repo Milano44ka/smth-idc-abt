@@ -79,13 +79,37 @@ PNode FindPlace (PNode Head, char NewWord[]) //поиск адреса узла,
  return q;
 } 
 
+void FillList()
+{
+    
+}
+
 int main()
 {
     setlocale(0, "");
+    
+    AddLast ( Head, CreateNode("Демидов") );
+    AddLast ( Head, CreateNode("Морев") );
+    AddLast ( Head, CreateNode("Котяшов") );
+    AddFirst ( Head, CreateNode("Тупейко") );
+    AddFirst ( Head, CreateNode("Ризванов") );
+    AddFirst ( Head, CreateNode("Фурсов") );
+    AddAfter ( Head, CreateNode("Галяткин") );
+    AddAfter ( Head, CreateNode("Матуленко"));
+    AddAfter ( Head, CreateNode("Слющенков") );
+    AddFirst ( Head, CreateNode("Губин") );
+    AddFirst ( Head, CreateNode("Волошин") );
+    AddFirst ( Head, CreateNode("Косаченко") );
+    
     PNode p = Head; 
+    
     while ( p != NULL )  // пока не дошли до конца
     {
-        // делаем что-нибудь с узлом p
+        std::cout<< p->word<<"\n";
         p = p->next; // переходим к следующему узлу
     } 
+    
+    std::cout<< "\nНашлась!!!\n"<<Find ( Head, "Тупейко")->word;
+    
+    return 0;
 }
